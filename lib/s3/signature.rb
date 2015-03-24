@@ -90,7 +90,7 @@ module S3
       resource = options[:resource]
       access_key = options[:access_key]
       expires = options[:expires_at].to_i
-      host = S3::HOST
+      host = options[:host] || S3::HOST
 
       if options[:add_bucket_to_host]
         host = bucket + '.' + host

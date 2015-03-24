@@ -29,6 +29,7 @@ module S3
       @debug = options.fetch(:debug, false)
       @timeout = options.fetch(:timeout, 60)
       @proxy = options.fetch(:proxy, nil)
+      @host = options.fetch(:host, S3::HOST)
       @chunk_size = options.fetch(:chunk_size, 1048576)
     end
 
@@ -54,7 +55,7 @@ module S3
     # ==== Returns
     # Net::HTTPResponse object -- response from the server
     def request(method, options)
-      host = options.fetch(:host, HOST)
+      host = options.fetch(:host, @host)
       path = options.fetch(:path)
       body = options.fetch(:body, nil)
       params = options.fetch(:params, {})

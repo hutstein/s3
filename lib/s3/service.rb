@@ -28,6 +28,7 @@ module S3
       @use_ssl = options.fetch(:use_ssl, false)
       @timeout = options.fetch(:timeout, 60)
       @debug = options.fetch(:debug, false)
+      @host = options.fetch(:host, S3::HOST)
 
       raise ArgumentError, "Missing proxy settings. Must specify at least :host." if options[:proxy] && !options[:proxy][:host]
       @proxy = options.fetch(:proxy, nil)
@@ -78,6 +79,7 @@ module S3
       return @connection if defined?(@connection)
       @connection = Connection.new(:access_key_id => @access_key_id,
                                :secret_access_key => @secret_access_key,
+                               :host => @host,
                                :use_ssl => @use_ssl,
                                :timeout => @timeout,
                                :debug => @debug,
